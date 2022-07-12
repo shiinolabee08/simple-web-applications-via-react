@@ -6,23 +6,17 @@
 
 body {
   font-family: "Helvetica", sans-serif;
+  margin: 0px 20px;
 }
 
-/* button{
-  margin: 2rem 0;
-  padding: 1rem 2rem;
-  width: 120px;
+.button {
+  display: inline-block;
+  border: none;
+  color: #fff;
+  background-color: #555;
   cursor: pointer;
 }
 
-.app {
-  padding: 30px;
-  background-color: floralwhite;
+.button:hover {
+  background: #777;
 }
-
-.todo {
-  align-items: center;
-  display: flex;
-  font-size: 18px;
-  justify-content: space-between;
-} */

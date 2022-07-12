@@ -6,9 +6,10 @@ class TodoItem extends Component {
   getItemContainerStyle = () => {
     return {
       backgroundColor: '#f4f4f4',
-      padding: '5px 9px',
-      border: 'none',
-      borderBottom: '1px solid #ccc'
+      padding: '10px',
+      border: '1px solid #ccc',
+      position: 'relative',
+      marginTop: '10px',
     };
   }
 
@@ -36,10 +37,24 @@ class TodoItem extends Component {
           onClick={this.props.toggleCompleteTodo.bind(this, id)}>
           { title }
         </label>
+        <button style={buttonStyle} onClick={this.props.deleteTodo.bind(this, id)}>x</button>
       </div>
     );
   }
 }
+
+const buttonStyle = {
+  background: '#ff0000',
+  color: '#fff',
+  padding: '5px 8px',
+  border: 'none',
+  borderRadius: '50%',
+  cursor: 'pointer',
+  verticalAlign: 'middle',
+  position: 'absolute',
+  right: '20px',
+  top: '5px',
+};
 
 // set prop types for required prop types
 TodoItem.propTypes = {
