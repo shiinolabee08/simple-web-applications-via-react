@@ -26,19 +26,22 @@ class TodoItem extends Component {
 
   render() {
     const { id, title } = this.props.todo;
+
     return (
-      <div style={this.getItemContainerStyle()}>
-        <input
-          type="checkbox"
-          checked={this.checkIfTodoIsCompleted()}
-          onChange={this.props.toggleCompleteTodo.bind(this, id)}/> { ' ' }
-        <label
-          style={this.getItemLabelStyle()}
-          onClick={this.props.toggleCompleteTodo.bind(this, id)}>
-          { title }
-        </label>
-        <button style={buttonStyle} onClick={this.props.deleteTodo.bind(this, id)}>x</button>
-      </div>
+      <>
+        <div style={this.getItemContainerStyle()}>
+          <input
+            type="checkbox"
+            checked={this.checkIfTodoIsCompleted()}
+            onChange={this.props.toggleCompleteTodo.bind(this, id)}/> { ' ' }
+          <label
+            style={this.getItemLabelStyle()}
+            onClick={this.props.toggleCompleteTodo.bind(this, id)}>
+            { title }
+          </label>
+          <button style={buttonStyle} onClick={this.props.deleteTodo.bind(this, id)}>x</button>
+        </div>
+      </>
     );
   }
 }
@@ -58,7 +61,9 @@ const buttonStyle = {
 
 // set prop types for required prop types
 TodoItem.propTypes = {
-  todo: PropTypes.object.isRequired
+  todo: PropTypes.object.isRequired,
+  toggleCompleteTodo: PropTypes.func.isRequired,
+  deleteTodo: PropTypes.func.isRequired,
 };
 
 export default TodoItem;
