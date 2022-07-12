@@ -22,23 +22,10 @@ function Main() {
 
           return todo;
         }));
-      })
-
-    /* setTodos(todos.map((todo) => {
-      if (todo.id === id) {
-        todo.completed = !todo.completed;
-      }
-
-      return todo;
-    })); */
+      });
   }
 
   const addTodo = (title) => {
-    /* const newTodo = {
-      id: todos.length + 1,
-      title,
-      completed: false,
-    } */
     axios.post(todoApiUrl, {
       title,
       completed: false,
@@ -51,6 +38,20 @@ function Main() {
     axios.delete(`${todoApiUrl}/${id}`).then((_response) => {
       setTodos([...todos.filter(todo => todo.id !== id)]);
     });
+  }
+
+  const clearAllTodo = () => {
+    setTodos([]);
+  };
+
+  const clearButtonStyle = {
+    marginTop: '10px',
+    color: '#fff',
+    backgroundColor: 'green',
+    padding: '1rem',
+    border: '1px solid green',
+    textTransform: 'uppercase',
+    cursor: 'pointer',
   }
 
   useEffect(() => {
@@ -69,6 +70,7 @@ function Main() {
           toggleCompleteTodo={toggleCompleteTodo}
           deleteTodo={deleteTodo}
           />
+        <button onClick={clearAllTodo} style={clearButtonStyle}>Clear all To-do</button>
       </React.Fragment>
     </>
 
