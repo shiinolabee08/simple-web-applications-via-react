@@ -1,18 +1,46 @@
 import './App.css';
-import React, { Component } from 'react';
+import React, { useState, createContext } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 import Header from './components/layouts/Header';
 import Main from './components/pages/Main';
 import About from './components/pages/About';
+import ToggleTheme from './components/ToggleTheme';
 
-class App extends Component {
+export const ThemeContext = createContext();
 
-  render() {
-    return (
-      <>
-        <BrowserRouter>
-          <div className="todo-list-app">
+function App() {
+
+  const themes = {
+    light: {
+      background: "#fff",
+      color: "#000",
+    },
+    dark: {
+      background: "#171717",
+      color: "#fff"
+    }
+  };
+
+  const [theme, setTheme] = useState('dark');
+  const toggleTheme = () => {
+    setTheme(theme === 'dark' ? 'light': 'dark');
+  }
+
+  const providerValue = {
+    details: {
+      name: theme,
+      styles: themes[theme],
+    },
+    toggleTheme,
+  }
+
+  return (
+    <>
+      <BrowserRouter>
+        <div className={`theme-${theme} todo-list-app`}>
+          <ThemeContext.Provider value={providerValue}>
+            <ToggleTheme/>
             <div className="container">
               <Header />
               <Routes>
@@ -20,12 +48,12 @@ class App extends Component {
                 <Route path="/about" element={<About />}/>
               </Routes>
             </div>
-          </div>
-        </BrowserRouter>
-      </>
+          </ThemeContext.Provider>
+        </div>
+      </BrowserRouter>
+    </>
 
-    );
-  }
+  );
 }
 
 export default App;

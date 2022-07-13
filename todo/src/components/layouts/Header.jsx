@@ -1,27 +1,20 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { ThemeContext } from '../../App';
 
 function Header() {
+
+  const theme = useContext(ThemeContext);
+
   return (
     <>
-      <header style={headerStyle}>
+      <header style={theme.details.styles}>
         <h1>Simple To-do List</h1>
-        <Link style={linkStyle} to="/">Home</Link> | <Link style={linkStyle} to="/about">About</Link>
+        <Link style={theme.details.styles} to="/">Home</Link> | <Link style={theme.details.styles} to="/about">About</Link>
       </header>
     </>
   );
 }
 
-const headerStyle = {
-  backgroundColor: '#333',
-  color: '#fff',
-  textAlign: 'center',
-  padding: '10px'
-}
-
-const linkStyle = {
-  color: '#fff',
-  textDecoration: 'none',
-}
 
 export default Header;

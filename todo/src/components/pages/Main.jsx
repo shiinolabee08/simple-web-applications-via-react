@@ -3,10 +3,11 @@ import axios from 'axios';
 
 import Todos from '../Todos';
 import AddTodo from '../AddTodo';
+/* import WithLoader from '../WithLoader'; */
 
 function Main() {
-  const todoApiUrl = 'https://jsonplaceholder.typicode.com/todos'; // a mock RESTful api
 
+  const todoApiUrl = 'https://jsonplaceholder.typicode.com/todos'; // a mock RESTful api
   const [todos, setTodos] = useState([]);
 
   const toggleCompleteTodo = (id) => {
@@ -55,11 +56,17 @@ function Main() {
   }
 
   useEffect(() => {
-    axios.get(`${todoApiUrl}?_limit=10`)
-      .then((response) => {
-        setTodos(response.data);
-      });
-  }, []);
+    if (!todos.length) {
+      axios.get(`${todoApiUrl}?_limit=10`)
+        .then((response) => {
+          setTodos(response.data);
+        });
+    }
+  }, [todos.length]);
+
+  if (!todos.length) {
+    return <><div>Loading...</div></>
+  }
 
   return (
     <>
@@ -73,8 +80,8 @@ function Main() {
         <button onClick={clearAllTodo} style={clearButtonStyle}>Clear all To-do</button>
       </React.Fragment>
     </>
-
   );
 }
+
 
 export default Main;
